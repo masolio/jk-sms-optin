@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SMS Opt-In — JK Janitorial Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --yale:   #023D61;
+    --bell:   #0C91D6;
+    --moss:   #88BC2C;
+    --orange: #F36518;
+    --plat:   #F2F2F3;
+    --grey:   #8B8D91;
+    --white:  #ffffff;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--plat);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 16px 60px;
+  }
+
+  /* ── Header ───────────────────────────────────── */
+  header {
+    width: calc(100% + 32px);
+    margin-left: -16px;
+    background: var(--yale);
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 4px solid var(--moss);
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: 'JK';
+    position: absolute; right: -10px; top: -18px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 120px; font-weight: 700;
+    color: rgba(255,255,255,0.04);
+    pointer-events: none;
+  }
+  .logo-wrap { display: flex; align-items: center; gap: 14px; }
+  .logo-mark {
+    width: 46px; height: 46px;
+    background: linear-gradient(135deg, var(--bell) 55%, var(--moss) 55%);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .logo-mark span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px; font-weight: 700; color: white;
+  }
+  .logo-text strong {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px; font-weight: 700; color: white;
+    letter-spacing: 1px; display: block;
+  }
+  .logo-text small { font-size: 10px; color: var(--bell); letter-spacing: 1px; text-transform: uppercase; }
+  .header-right { text-align: right; }
+  .header-right p { color: rgba(255,255,255,0.55); font-size: 11px; line-height: 1.7; }
+  .header-right p strong { color: rgba(255,255,255,0.85); }
+
+  /* ── Card ─────────────────────────────────────── */
+  .card {
+    width: 100%; max-width: 600px;
+    margin-top: 36px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 32px rgba(2,61,97,0.10);
+    overflow: hidden;
+    animation: slideUp 0.4s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  @keyframes slideUp {
+    from { opacity:0; transform:translateY(20px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  .card-header {
+    background: var(--yale);
+    padding: 26px 28px 22px;
+    border-left: 6px solid var(--moss);
+  }
+  .card-header h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 24px; font-weight: 700; color: white; margin-bottom: 4px;
+  }
+  .card-header p { font-size: 12.5px; color: rgba(255,255,255,0.58); }
+
+  .form-body { padding: 26px 28px 30px; }
+
+  /* ── Phone-only notice ────────────────────────── */
+  .phone-notice {
+    background: #fff8f5;
+    border: 1.5px solid #fddcc4;
+    border-left: 4px solid var(--orange);
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-bottom: 22px;
+    font-size: 12px;
+    color: #6b3000;
+    line-height: 1.55;
+  }
+
+  /* ── Section labels ───────────────────────────── */
+  .sec {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10.5px; font-weight: 700;
+    color: var(--bell); letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 22px 0 12px;
+  }
+  .sec:first-of-type { margin-top: 0; }
+
+  /* ── Fields ───────────────────────────────────── */
+  .row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .field { flex: 1 1 160px; display: flex; flex-direction: column; gap: 5px; }
+  .field.full { flex: 1 1 100%; }
+
+  label.fl {
+    font-size: 11.5px; font-weight: 600;
+    color: var(--yale); letter-spacing: 0.3px;
+  }
+  .req { color: var(--orange); }
+
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"] {
+    width: 100%; padding: 10px 12px;
+    font-family: 'Barlow', sans-serif; font-size: 14px;
+    border: 1.5px solid #d0dde8; border-radius: 6px;
+    background: #FAFCFE; color: var(--yale);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  input::placeholder { color: #b0bec9; font-size: 13px; }
+  input:focus { border-color: var(--bell); background: white; box-shadow: 0 0 0 3px rgba(12,145,214,0.12); }
+  input.err-field { border-color: var(--orange); }
+
+  .err-msg { font-size: 11px; color: var(--orange); display: none; margin-top: 2px; }
+  .err-msg.show { display: block; }
+
+  hr { border: none; border-top: 1px solid #e4edf4; margin: 24px 0; }
+
+  /* ── Consent checkbox blocks ──────────────────── */
+  .consent-block {
+    border: 1.5px solid #d0dde8;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 14px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .consent-block:hover { border-color: #a8cce0; }
+  .consent-block.active { border-color: var(--bell); background: #f0f8ff; }
+
+  .consent-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+  }
+
+  /* native checkbox — visible, explicit, NOT pre-checked */
+  .consent-row input[type="checkbox"] {
+    width: 18px; height: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    accent-color: var(--bell);
+    cursor: pointer;
+  }
+
+  .consent-copy { flex: 1; }
+  .consent-copy .label-head {
+    font-size: 13px; font-weight: 600; color: var(--yale);
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 6px;
+    cursor: pointer;
+  }
+  .opt-badge {
+    font-size: 10px; font-weight: 700;
+    color: var(--grey); background: #eef1f4;
+    padding: 2px 7px; border-radius: 3px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  /* THE DISCLOSURE TEXT — scanner reads this */
+  .disclosure-text {
+    font-size: 12.5px;
+    color: #334a5e;
+    line-height: 1.65;
+    pointer-events: none;
+    user-select: text;
+  }
+
+  .not-required-note {
+    margin-top: 10px;
+    padding: 8px 10px;
+    background: #f5f8fa;
+    border-radius: 5px;
+    font-size: 11px;
+    color: var(--grey);
+    line-height: 1.5;
+  }
+
+  /* ── Privacy & links ──────────────────────────── */
+  .privacy-section {
+    margin-top: 22px;
+    padding: 16px;
+    background: var(--plat);
+    border-radius: 8px;
+    font-size: 12px;
+    color: #334a5e;
+    line-height: 1.7;
+  }
+  .privacy-section p { margin-bottom: 6px; }
+  .privacy-section p:last-child { margin-bottom: 0; }
+  .privacy-links {
+    display: flex; gap: 16px; margin-top: 10px; flex-wrap: wrap;
+  }
+  .privacy-links a {
+    color: var(--bell);
+    text-decoration: underline;
+    font-size: 12.5px;
+    font-weight: 600;
+  }
+
+  /* ── Submit ───────────────────────────────────── */
+  .btn-submit {
+    width: 100%;
+    padding: 14px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 17px; font-weight: 700; letter-spacing: 1px;
+    color: white; background: var(--yale);
+    border: none; border-radius: 7px;
+    cursor: pointer;
+    margin-top: 22px;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 3px 12px rgba(2,61,97,0.20);
+    position: relative; overflow: hidden;
+  }
+  .btn-submit::after {
+    content: ''; position: absolute;
+    left: 0; bottom: 0; width: 100%; height: 3px;
+    background: var(--moss);
+  }
+  .btn-submit:hover { background: #034e7a; }
+  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  /* ── Success ──────────────────────────────────── */
+  .success-screen {
+    display: none; flex-direction: column;
+    align-items: center; padding: 52px 28px; text-align: center;
+  }
+  .success-icon {
+    width: 64px; height: 64px;
+    background: var(--moss); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 18px;
+    animation: pop 0.4s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  @keyframes pop { from { transform:scale(0);opacity:0; } to { transform:scale(1);opacity:1; } }
+  .success-icon svg { width: 30px; height: 30px; }
+  .success-screen h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 26px; font-weight: 700; color: var(--yale); margin-bottom: 8px;
+  }
+  .success-screen p { font-size: 13.5px; color: var(--grey); max-width: 360px; line-height: 1.6; }
+
+  footer {
+    margin-top: 22px;
+    text-align: center;
+    font-size: 11px; color: var(--grey); line-height: 1.7;
+  }
+
+  @media (max-width: 520px) {
+    header { padding: 16px 18px; }
+    .header-right { display: none; }
+    .form-body { padding: 18px 18px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <div class="logo-mark"><span>JK</span></div>
+    <div class="logo-text">
+      <strong>JK JANITORIAL SERVICES</strong>
+      <small>Est. 1987</small>
+    </div>
+  </div>
+  <div class="header-right">
+    <p><strong>Oklahoma City · Dallas · Little Rock</strong></p>
+    <p>1-866-997-8874 · jkjanitorialservices.com</p>
+  </div>
+</header>
+
+<div class="card" id="mainCard">
+  <div class="card-header">
+    <h1>SMS Text Message Opt-In</h1>
+    <p>Complete the form to receive text communications from JK Janitorial Services.</p>
+  </div>
+
+  <div class="form-body">
+    <form id="optInForm" novalidate>
+
+      <!-- Phone-entry disclaimer -->
+      <div class="phone-notice">
+        <strong>Please note:</strong> Entering your phone number alone does not grant permission to send SMS messages. SMS consent must be collected explicitly using the checkboxes below.
+      </div>
+
+      <div class="sec">Your Information</div>
+
+      <div class="row">
+        <div class="field">
+          <label class="fl" for="firstName">First Name <span class="req">*</span></label>
+          <input type="text" id="firstName" name="firstName" placeholder="Jane" autocomplete="given-name"/>
+          <span class="err-msg" id="firstNameErr">Required</span>
+        </div>
+        <div class="field">
+          <label class="fl" for="lastName">Last Name <span class="req">*</span></label>
+          <input type="text" id="lastName" name="lastName" placeholder="Smith" autocomplete="family-name"/>
+          <span class="err-msg" id="lastNameErr">Required</span>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:12px">
+        <div class="field full">
+          <label class="fl" for="company">Company / Organization</label>
+          <input type="text" id="company" name="company" placeholder="Acme Corp" autocomplete="organization"/>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:12px">
+        <div class="field">
+          <label class="fl" for="phone">Mobile Phone <span class="req">*</span></label>
+          <input type="tel" id="phone" name="phone" placeholder="(405) 555-0100" autocomplete="tel"/>
+          <span class="err-msg" id="phoneErr">Enter a valid 10-digit mobile number</span>
+        </div>
+        <div class="field">
+          <label class="fl" for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="jane@company.com" autocomplete="email"/>
+          <span class="err-msg" id="emailErr">Enter a valid email address</span>
+        </div>
+      </div>
+
+      <hr/>
+
+      <div class="sec">SMS Consent</div>
+
+      <!--
+        COMPLIANCE CHECKLIST:
+        ✅ Business name in consent text: "JK Janitorial Services"
+        ✅ Checkbox NOT pre-checked (explicit consent)
+        ✅ Opt-out instructions: "Reply STOP to opt out"
+        ✅ Message frequency disclosure: "Message frequency may vary"
+        ✅ Checkbox is optional (not required)
+        ✅ Message type disclosure: stated per block
+        ✅ Message & data rates disclosure: "Message & data rates may apply"
+        ✅ Privacy policy & terms links: below
+      -->
+
+      <!-- Block 1: Transactional -->
+      <div class="consent-block" id="transBlock">
+        <div class="consent-row" onclick="toggleBlock('trans')">
+          <input
+            type="checkbox"
+            id="transCb"
+            name="sms_transactional_consent"
+            value="yes"
+            aria-label="Transactional SMS consent — optional"
+          />
+          <div class="consent-copy">
+            <div class="label-head">
+              Transactional Messages
+              <span class="opt-badge">Optional</span>
+            </div>
+            <p class="disclosure-text">
+              I consent to receive transactional messages from
+              <strong>JK Janitorial Services</strong>
+              at the phone number provided. Message types include account alerts,
+              service reminders, and scheduling notifications.
+              Message frequency may vary.
+              Message &amp; data rates may apply.
+              Reply <strong>HELP</strong> for help or
+              <strong>STOP</strong> to opt out at any time.
+            </p>
+          </div>
+        </div>
+        <div class="not-required-note">
+          This checkbox is <strong>optional</strong> and will not prevent you from submitting this form.
+        </div>
+      </div>
+
+      <!-- Block 2: Marketing -->
+      <div class="consent-block" id="mktgBlock">
+        <div class="consent-row" onclick="toggleBlock('mktg')">
+          <input
+            type="checkbox"
+            id="mktgCb"
+            name="sms_marketing_consent"
+            value="yes"
+            aria-label="Marketing SMS consent — optional"
+          />
+          <div class="consent-copy">
+            <div class="label-head">
+              Marketing &amp; Promotional Messages
+              <span class="opt-badge">Optional</span>
+            </div>
+            <p class="disclosure-text">
+              I consent to receive marketing and promotional messages from
+              <strong>JK Janitorial Services</strong>
+              at the phone number provided. Message types include special offers
+              and company announcements.
+              Message frequency may vary.
+              Message &amp; data rates may apply.
+              Reply <strong>HELP</strong> for help or
+              <strong>STOP</strong> to opt out at any time.
+            </p>
+          </div>
+        </div>
+        <div class="not-required-note">
+          This checkbox is <strong>optional</strong>. Marketing SMS consent is never mandatory and cannot block form submission.
+        </div>
+      </div>
+
+      <!-- Privacy section with required links -->
+      <div class="privacy-section">
+        <p>SMS consent is <strong>not shared with third parties</strong>, except as required by SMS service providers.</p>
+        <p>By submitting this form you acknowledge you have read and agree to our privacy policy and terms of service.</p>
+        <div class="privacy-links">
+          <a href="https://jkjanitorialservices.com/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>
+          <a href="https://jkjanitorialservices.com/terms-of-service" target="_blank" rel="noopener">Terms of Service</a>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit" id="submitBtn">Submit</button>
+
+    </form>
+
+    <div class="success-screen" id="successScreen">
+      <div class="success-icon">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polyline points="6,17 13,24 26,9" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h2>Form Submitted</h2>
+      <p>Your preferences have been saved. Reply <strong>STOP</strong> at any time to opt out of text messages from JK Janitorial Services.</p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  JK Janitorial Services &nbsp;|&nbsp; Est. 1987 &nbsp;|&nbsp; Oklahoma City · Dallas · Little Rock<br/>
+  1-866-997-8874 &nbsp;|&nbsp; jkjanitorialservices.com
+</footer>
+
+<script>
+  // Toggle consent blocks — checkbox stays native unchecked by default
+  function toggleBlock(type) {
+    const cb    = document.getElementById(type === 'trans' ? 'transCb' : 'mktgCb');
+    const block = document.getElementById(type === 'trans' ? 'transBlock' : 'mktgBlock');
+    cb.checked  = !cb.checked;
+    block.classList.toggle('active', cb.checked);
+  }
+
+  // Also handle direct checkbox clicks without double-toggling
+  ['transCb','mktgCb'].forEach(id => {
+    document.getElementById(id).addEventListener('click', function(e) {
+      e.stopPropagation();
+      const block = document.getElementById(id === 'transCb' ? 'transBlock' : 'mktgBlock');
+      block.classList.toggle('active', this.checked);
+    });
+  });
+
+  // Phone formatter
+  document.getElementById('phone').addEventListener('input', function() {
+    let v = this.value.replace(/\D/g,'').slice(0,10);
+    if (v.length >= 7)      v = `(${v.slice(0,3)}) ${v.slice(3,6)}-${v.slice(6)}`;
+    else if (v.length >= 4) v = `(${v.slice(0,3)}) ${v.slice(3)}`;
+    else if (v.length > 0)  v = `(${v}`;
+    this.value = v;
+  });
+
+  // Validation
+  function setErr(inputId, errId, show) {
+    document.getElementById(inputId).classList.toggle('err-field', show);
+    document.getElementById(errId).classList.toggle('show', show);
+  }
+
+  function validate() {
+    let ok = true;
+    const fn = document.getElementById('firstName').value.trim();
+    const ln = document.getElementById('lastName').value.trim();
+    const ph = document.getElementById('phone').value.replace(/\D/g,'');
+    const em = document.getElementById('email').value.trim();
+
+    if (!fn) { setErr('firstName','firstNameErr',true); ok=false; } else setErr('firstName','firstNameErr',false);
+    if (!ln) { setErr('lastName','lastNameErr',true);  ok=false; } else setErr('lastName','lastNameErr',false);
+    if (ph.length !== 10) { setErr('phone','phoneErr',true); ok=false; } else setErr('phone','phoneErr',false);
+    if (em && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { setErr('email','emailErr',true); ok=false; } else setErr('email','emailErr',false);
+
+    return ok;
+  }
+
+  // Submit
+  document.getElementById('optInForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (!validate()) return;
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = 'Submitting…';
+    btn.disabled = true;
+    setTimeout(() => {
+      document.getElementById('optInForm').style.display = 'none';
+      document.getElementById('successScreen').style.display = 'flex';
+    }, 700);
+  });
+</script>
+</body>
+</html>
