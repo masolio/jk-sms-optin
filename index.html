@@ -27,7 +27,6 @@
     padding: 0 16px 60px;
   }
 
-  /* ── Header ───────────────────────────────────── */
   header {
     width: calc(100% + 32px);
     margin-left: -16px;
@@ -69,7 +68,6 @@
   .header-right p { color: rgba(255,255,255,0.55); font-size: 11px; line-height: 1.7; }
   .header-right p strong { color: rgba(255,255,255,0.85); }
 
-  /* ── Card ─────────────────────────────────────── */
   .card {
     width: 100%; max-width: 600px;
     margin-top: 36px;
@@ -97,7 +95,6 @@
 
   .form-body { padding: 26px 28px 30px; }
 
-  /* ── Phone-only notice ────────────────────────── */
   .phone-notice {
     background: #fff8f5;
     border: 1.5px solid #fddcc4;
@@ -105,12 +102,9 @@
     border-radius: 6px;
     padding: 12px 14px;
     margin-bottom: 22px;
-    font-size: 12px;
-    color: #6b3000;
-    line-height: 1.55;
+    font-size: 12px; color: #6b3000; line-height: 1.55;
   }
 
-  /* ── Section labels ───────────────────────────── */
   .sec {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 10.5px; font-weight: 700;
@@ -118,9 +112,7 @@
     text-transform: uppercase;
     margin: 22px 0 12px;
   }
-  .sec:first-of-type { margin-top: 0; }
 
-  /* ── Fields ───────────────────────────────────── */
   .row { display: flex; gap: 12px; flex-wrap: wrap; }
   .field { flex: 1 1 160px; display: flex; flex-direction: column; gap: 5px; }
   .field.full { flex: 1 1 100%; }
@@ -150,99 +142,95 @@
 
   hr { border: none; border-top: 1px solid #e4edf4; margin: 24px 0; }
 
-  /* ── Consent checkbox blocks ──────────────────── */
+  /* ── Consent blocks ──────────────────────────────────
+     The <label> wraps BOTH the checkbox and ALL disclosure
+     text so the scanner can associate them correctly.
+  ─────────────────────────────────────────────────── */
   .consent-block {
     border: 1.5px solid #d0dde8;
     border-radius: 8px;
-    padding: 16px;
     margin-bottom: 14px;
     transition: border-color 0.2s, background 0.2s;
+    overflow: hidden;
   }
-  .consent-block:hover { border-color: #a8cce0; }
-  .consent-block.active { border-color: var(--bell); background: #f0f8ff; }
+  .consent-block:has(input:checked) {
+    border-color: var(--bell);
+    background: #f0f8ff;
+  }
 
-  .consent-row {
+  /* The label IS the entire clickable consent area */
+  .consent-label-wrap {
     display: flex;
     align-items: flex-start;
     gap: 12px;
+    padding: 16px;
     cursor: pointer;
   }
 
-  /* native checkbox — visible, explicit, NOT pre-checked */
-  .consent-row input[type="checkbox"] {
+  .consent-label-wrap input[type="checkbox"] {
     width: 18px; height: 18px;
     flex-shrink: 0;
-    margin-top: 2px;
+    margin-top: 3px;
     accent-color: var(--bell);
     cursor: pointer;
   }
 
-  .consent-copy { flex: 1; }
-  .consent-copy .label-head {
-    font-size: 13px; font-weight: 600; color: var(--yale);
+  .consent-text-wrap { flex: 1; }
+
+  .consent-heading {
+    font-size: 13px; font-weight: 700;
+    color: var(--yale);
     display: flex; align-items: center; gap: 8px;
-    margin-bottom: 6px;
-    cursor: pointer;
+    margin-bottom: 8px;
+    line-height: 1.3;
   }
   .opt-badge {
     font-size: 10px; font-weight: 700;
     color: var(--grey); background: #eef1f4;
     padding: 2px 7px; border-radius: 3px;
     text-transform: uppercase; letter-spacing: 0.5px;
+    flex-shrink: 0;
   }
 
-  /* THE DISCLOSURE TEXT — scanner reads this */
-  .disclosure-text {
+  /* Disclosure text — plain, unbroken, scanner-readable */
+  .consent-disclosure {
     font-size: 12.5px;
     color: #334a5e;
     line-height: 1.65;
-    pointer-events: none;
-    user-select: text;
   }
 
   .not-required-note {
-    margin-top: 10px;
-    padding: 8px 10px;
-    background: #f5f8fa;
-    border-radius: 5px;
-    font-size: 11px;
-    color: var(--grey);
-    line-height: 1.5;
+    padding: 8px 16px 12px 46px;
+    font-size: 11px; color: var(--grey); line-height: 1.5;
   }
 
-  /* ── Privacy & links ──────────────────────────── */
+  /* ── Privacy block ─────────────────────────────── */
   .privacy-section {
-    margin-top: 22px;
+    margin-top: 20px;
     padding: 16px;
     background: var(--plat);
     border-radius: 8px;
-    font-size: 12px;
-    color: #334a5e;
-    line-height: 1.7;
+    font-size: 12px; color: #334a5e; line-height: 1.7;
   }
   .privacy-section p { margin-bottom: 6px; }
-  .privacy-section p:last-child { margin-bottom: 0; }
   .privacy-links {
     display: flex; gap: 16px; margin-top: 10px; flex-wrap: wrap;
   }
   .privacy-links a {
     color: var(--bell);
     text-decoration: underline;
-    font-size: 12.5px;
-    font-weight: 600;
+    font-size: 12.5px; font-weight: 600;
   }
 
-  /* ── Submit ───────────────────────────────────── */
+  /* ── Submit ────────────────────────────────────── */
   .btn-submit {
-    width: 100%;
-    padding: 14px;
+    width: 100%; padding: 14px;
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 17px; font-weight: 700; letter-spacing: 1px;
     color: white; background: var(--yale);
-    border: none; border-radius: 7px;
-    cursor: pointer;
+    border: none; border-radius: 7px; cursor: pointer;
     margin-top: 22px;
-    transition: background 0.2s, box-shadow 0.2s;
+    transition: background 0.2s;
     box-shadow: 0 3px 12px rgba(2,61,97,0.20);
     position: relative; overflow: hidden;
   }
@@ -254,7 +242,7 @@
   .btn-submit:hover { background: #034e7a; }
   .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
 
-  /* ── Success ──────────────────────────────────── */
+  /* ── Success ───────────────────────────────────── */
   .success-screen {
     display: none; flex-direction: column;
     align-items: center; padding: 52px 28px; text-align: center;
@@ -275,8 +263,7 @@
   .success-screen p { font-size: 13.5px; color: var(--grey); max-width: 360px; line-height: 1.6; }
 
   footer {
-    margin-top: 22px;
-    text-align: center;
+    margin-top: 22px; text-align: center;
     font-size: 11px; color: var(--grey); line-height: 1.7;
   }
 
@@ -312,7 +299,6 @@
   <div class="form-body">
     <form id="optInForm" novalidate>
 
-      <!-- Phone-entry disclaimer -->
       <div class="phone-notice">
         <strong>Please note:</strong> Entering your phone number alone does not grant permission to send SMS messages. SMS consent must be collected explicitly using the checkboxes below.
       </div>
@@ -357,82 +343,57 @@
       <div class="sec">SMS Consent</div>
 
       <!--
-        COMPLIANCE CHECKLIST:
-        ✅ Business name in consent text: "JK Janitorial Services"
-        ✅ Checkbox NOT pre-checked (explicit consent)
-        ✅ Opt-out instructions: "Reply STOP to opt out"
-        ✅ Message frequency disclosure: "Message frequency may vary"
-        ✅ Checkbox is optional (not required)
-        ✅ Message type disclosure: stated per block
-        ✅ Message & data rates disclosure: "Message & data rates may apply"
-        ✅ Privacy policy & terms links: below
+        ✅ COMPLIANCE MAP:
+        - Business name: "JK Janitorial Services" in plain label text
+        - Checkbox not pre-checked: no "checked" attribute present
+        - Opt-out: "Reply STOP to opt-out" inside label
+        - Message frequency: "Message frequency may vary" inside label
+        - Checkbox optional: required=false + noted below block
+        - Message type: explicitly named inside label
+        - Msg & data rates: "Message & data rates may apply" inside label
+        - Privacy & terms: linked in privacy block below
       -->
 
-      <!-- Block 1: Transactional -->
-      <div class="consent-block" id="transBlock">
-        <div class="consent-row" onclick="toggleBlock('trans')">
+      <!-- TRANSACTIONAL — label wraps checkbox + full disclosure -->
+      <div class="consent-block">
+        <label class="consent-label-wrap" for="transCb">
           <input
             type="checkbox"
             id="transCb"
             name="sms_transactional_consent"
             value="yes"
-            aria-label="Transactional SMS consent — optional"
           />
-          <div class="consent-copy">
-            <div class="label-head">
+          <div class="consent-text-wrap">
+            <div class="consent-heading">
               Transactional Messages
               <span class="opt-badge">Optional</span>
             </div>
-            <p class="disclosure-text">
-              I consent to receive transactional messages from
-              <strong>JK Janitorial Services</strong>
-              at the phone number provided. Message types include account alerts,
-              service reminders, and scheduling notifications.
-              Message frequency may vary.
-              Message &amp; data rates may apply.
-              Reply <strong>HELP</strong> for help or
-              <strong>STOP</strong> to opt out at any time.
-            </p>
+            <span class="consent-disclosure">I consent to receive transactional messages from JK Janitorial Services at the phone number provided. Message types include account alerts, service reminders, and scheduling notifications. Message frequency may vary. Message &amp; data rates may apply. Reply HELP for help or STOP to opt-out.</span>
           </div>
-        </div>
-        <div class="not-required-note">
-          This checkbox is <strong>optional</strong> and will not prevent you from submitting this form.
-        </div>
+        </label>
+        <div class="not-required-note">This checkbox is optional and will not prevent you from submitting this form.</div>
       </div>
 
-      <!-- Block 2: Marketing -->
-      <div class="consent-block" id="mktgBlock">
-        <div class="consent-row" onclick="toggleBlock('mktg')">
+      <!-- MARKETING — label wraps checkbox + full disclosure -->
+      <div class="consent-block">
+        <label class="consent-label-wrap" for="mktgCb">
           <input
             type="checkbox"
             id="mktgCb"
             name="sms_marketing_consent"
             value="yes"
-            aria-label="Marketing SMS consent — optional"
           />
-          <div class="consent-copy">
-            <div class="label-head">
+          <div class="consent-text-wrap">
+            <div class="consent-heading">
               Marketing &amp; Promotional Messages
               <span class="opt-badge">Optional</span>
             </div>
-            <p class="disclosure-text">
-              I consent to receive marketing and promotional messages from
-              <strong>JK Janitorial Services</strong>
-              at the phone number provided. Message types include special offers
-              and company announcements.
-              Message frequency may vary.
-              Message &amp; data rates may apply.
-              Reply <strong>HELP</strong> for help or
-              <strong>STOP</strong> to opt out at any time.
-            </p>
+            <span class="consent-disclosure">I consent to receive marketing and promotional messages from JK Janitorial Services at the phone number provided. Message types include special offers and company announcements. Message frequency may vary. Message &amp; data rates may apply. Reply HELP for help or STOP to opt-out.</span>
           </div>
-        </div>
-        <div class="not-required-note">
-          This checkbox is <strong>optional</strong>. Marketing SMS consent is never mandatory and cannot block form submission.
-        </div>
+        </label>
+        <div class="not-required-note">This checkbox is optional. Marketing SMS consent is never mandatory and cannot block form submission.</div>
       </div>
 
-      <!-- Privacy section with required links -->
       <div class="privacy-section">
         <p>SMS consent is <strong>not shared with third parties</strong>, except as required by SMS service providers.</p>
         <p>By submitting this form you acknowledge you have read and agree to our privacy policy and terms of service.</p>
@@ -453,7 +414,7 @@
         </svg>
       </div>
       <h2>Form Submitted</h2>
-      <p>Your preferences have been saved. Reply <strong>STOP</strong> at any time to opt out of text messages from JK Janitorial Services.</p>
+      <p>Your preferences have been saved. Reply STOP at any time to opt out of text messages from JK Janitorial Services.</p>
     </div>
 
   </div>
@@ -465,23 +426,6 @@
 </footer>
 
 <script>
-  // Toggle consent blocks — checkbox stays native unchecked by default
-  function toggleBlock(type) {
-    const cb    = document.getElementById(type === 'trans' ? 'transCb' : 'mktgCb');
-    const block = document.getElementById(type === 'trans' ? 'transBlock' : 'mktgBlock');
-    cb.checked  = !cb.checked;
-    block.classList.toggle('active', cb.checked);
-  }
-
-  // Also handle direct checkbox clicks without double-toggling
-  ['transCb','mktgCb'].forEach(id => {
-    document.getElementById(id).addEventListener('click', function(e) {
-      e.stopPropagation();
-      const block = document.getElementById(id === 'transCb' ? 'transBlock' : 'mktgBlock');
-      block.classList.toggle('active', this.checked);
-    });
-  });
-
   // Phone formatter
   document.getElementById('phone').addEventListener('input', function() {
     let v = this.value.replace(/\D/g,'').slice(0,10);
